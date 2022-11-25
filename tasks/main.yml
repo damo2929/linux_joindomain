@@ -24,7 +24,7 @@
   block:
     - name: Join {{ ansible_distribution }} {{ ansible_distribution_major_version }} into Domain {{ DomainName }}
       expect:
-        command: /bin/bash -c "/usr/sbin/realm join -U {{ Join_User }} {{ DomainName }}"
+        command: /bin/bash -c "/usr/sbin/realm join -U {{ Join_User }} {{ DomainName }} --membership-software=adcli --automatic-id-mapping={{ sssd_automatic_id_mapping }}"
         responses:
           Password for *: "{{ Join_User_Pass }}"
 

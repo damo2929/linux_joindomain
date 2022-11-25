@@ -1,7 +1,7 @@
 galaxy_info:
   author: Mahdi BOURBITA
   role_name: linux_joindomain
-  description: Join Domain Active Directory using sssd for RedHat, CentOS, Debian, Ubuntu distributions and using samba winbind for Redhat/CentOS 6
+  description: Join Domain Active Directory using sssd for RedHat, CentOS, Debian, Ubuntu distributions and using realm & adcli
 
   license: Apache
 
@@ -10,9 +10,9 @@ galaxy_info:
   platforms:
   - name: EL
     versions:
-    - 6
     - 7
     - 8
+    - 9
   - name: Debian
     versions:
       - buster
@@ -27,11 +27,11 @@ galaxy_info:
     - linux
     - sssd
     - realm
-    - samba
-    - winbind
     - krb5
     - redhat
     - centos
+    - rocky
+    - adcli
     - ansible
     - debian
     - ubuntu

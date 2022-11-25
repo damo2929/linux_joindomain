@@ -1,26 +1,21 @@
 ---
-# defaults file for CentOS7JoinDomain
-pexpect_source: package
+# defaults file for JoinDomain
 join_domain: true
+Join_User: ADMDOMAIN
+DomainName: linuxlab.local
+Join_User_Pass: admdomainpassword
+realm: LINUXLAB.LOCAL
+server: linuxlab.local
+
+# set to "no" to use the AD unix attributes defined in RFC2307
+# https://wiki.samba.org/index.php/Idmap_config_ad
+# https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/windows_integration_guide/sssd-integration-intro
+sssd_automatic_id_mapping: yes
+
+
 use_proxy: False
 proxy_env: []
 #example:
 #  proxy_env:
 #  http_proxy: http://proxy.local:8080/
 #  https_proxy: http://proxy.local:8080/
-Join_User: ADMDOMAIN
-DomainName: linuxlab.local
-Join_User_Pass: admdomainpassword
-realm: LINUXLAB.LOCAL
-server: linuxlab.local
-#### CentOS/RHel 6 VARS #######
-workgroup: LAB
-winbind_krb5:
-  realms:
-    kdc:
-      - kerberos-1.linuxlab.local:88
-      - kerberos-1.linuxlab.local:88
-      - kerberos-1.linuxlab.local:88
-  domain_realms:
-    - .linuxlab.local
-    - linuxlab.local
