@@ -1,5 +1,6 @@
 ---
 # defaults file for CentOS7JoinDomain
+pexpect_source: package
 join_domain: true
 use_proxy: False
 proxy_env: []
