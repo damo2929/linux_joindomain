@@ -10,4 +10,4 @@ package:
   - samba-common-tools 
   - krb5-workstation 
   - openldap-clients
-  - python3-pip
+  - python3-pexpect
