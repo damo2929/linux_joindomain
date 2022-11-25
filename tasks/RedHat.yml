@@ -13,45 +13,89 @@
     state: present
   when: (use_proxy is not defined) or (not use_proxy)
 
-- name: Install PEXPECT With PIP For CentOS 7
+- name: Install PEXPECT With PIP For EL7
   pip:
     name: pexpect
     executable: pip
   environment: "{{ proxy_env }}"
   when:
-    - (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
+    - distribution_file_variety == "RedHat"
     - ansible_distribution_major_version == "7"
     - use_proxy is defined
     - use_proxy
+    - pexpect_source == "pip"
 
-- name: Install PEXPECT With PIP For CentOS 7
+- name: Install PEXPECT With PIP For EL7
   pip:
     name: pexpect
     executable: pip
   when:
-    - (ansible_distribution == "CentOS") or (ansible_distribution == "RedHat")
+    - distribution_file_variety == "RedHat"
     - ansible_distribution_major_version == "7"
     - (use_proxy is not defined) or (not use_proxy)
+    - pexpect_source == "pip"
 
-- name: Install PEXPECT with PIP3.6 For CentOS 8
+- name: Install PEXPECT with PIP3.6 For EL8+
   pip:
     name: pexpect
     executable: pip3.6
   environment: "{{ proxy_env }}"
   when:
-    - (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+    - distribution_file_variety == "RedHat"
     - ansible_distribution_major_version == "8"
     - use_proxy is defined
     - use_proxy
+    - pexpect_source == "pip"
 
-- name: Install PEXPECT with PIP3.6 For CentOS 8
+- name: Install PEXPECT with PIP3.6 For EL8+
   pip:
     name: pexpect
     executable: pip3.6
   when:
-    - (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+    - distribution_file_variety == "RedHat" 
     - ansible_distribution_major_version == "8"
     - (use_proxy is not defined) or (not use_proxy)
+    - pexpect_source == "pip"
+    
+ - name: Install Required python expect package
+  yum:
+    name: "pexpect"
+    state: present
+  environment: "{{ proxy_env }}"
+  when:
+    - use_proxy is defined
+    - use_proxy
+    - pexpect_source == "package"
+    - ansible_distribution_major_version == "7"
+
+- name: Install Required Packages
+  yum:
+    name: "pexpect"
+    state: present
+  when: 
+    - (use_proxy is not defined) or (not use_proxy) 
+    - pexpect_source == "package"
+    - ansible_distribution_major_version == "7"
+ 
+ - name: Install Required Packages
+  yum:
+    name: "python3-pexpect"
+    state: present
+  environment: "{{ proxy_env }}"
+  when:
+    - use_proxy is defined
+    - use_proxy
+    - pexpect_source == "package"
+    - ansible_distribution_major_version > "7"
+
+- name: Install Required Packages
+  yum:
+    name: "python3-pexpect"
+    state: present
+  when: 
+    - (use_proxy is not defined) or (not use_proxy) 
+    - pexpect_source == "package"
+    - ansible_distribution_major_version > "7"
 
 - name: Checking Domain Join status
   command: id "{{ Join_User }}"
