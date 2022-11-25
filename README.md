@@ -1,5 +1,6 @@
 <h1>linux_joindomain</h1>
 This is an ansible role to automaticaly join Linux Machine CentOS and Redhat using sssd, realm, samba and winbind. This role is tested on RedHat/CentOS 7.x, 8.x 6.6 and Ubuntu 22 20 18 16 and Debian 10 9
+Note RH6 support has been dropped.
 
 # Requirements
 
@@ -35,18 +36,7 @@ Join_User_Pass: admdomainpassword # Replace admdomainpassword with the username 
 realm: LINUXLAB.LOCAL # replace this value with by Domaine Name
 server: linuxlab.local # replace this value with by active directory server
 ```
-file: vars/RedHat-6.yml
-```yaml
-workgroup: LAB # replace this value with by WORKGROUP
-kdc:
-    - kerberos-1.linuxlab.local:88 # replace this value with by firt Kerberos server name
-    - kerberos-2.linuxlab.local:88 # replace this value with by second Kerberos server name
-    - kerberos-3.linuxlab.local:88 # replace this value with by third Kerberos server name
-domain_realms:
-    - .linuxlab.local # replace this value with by domaine name
-    - linuxlab.local # replace this value with by domaine name
-```
-    
+   
  # Example Playbook
 ```yaml
 - hosts: servers
@@ -59,12 +49,8 @@ domain_realms:
 
 This role is tested on Linux distributions:
 
-- RHEL/CentOS 8
-- RHEL/CentOS 7
-- RHEL/CentOS 6
-- Debian 10
-- Debian 9
-- Debian 8
+- RHEL/CentOS/Rocky 7/8/9
+- Debian 8/9/10
 - Ubuntu 22.04
 - Ubuntu 20.04
 - Ubuntu 19.10
